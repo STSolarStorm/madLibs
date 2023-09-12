@@ -6,6 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+
 router.post('/story', function(req,res){
   let body = req.body;
   let newStory =  getStory(body);
@@ -13,6 +14,14 @@ router.post('/story', function(req,res){
     newStory: newStory
   });
 })
+
+
+router.post('/story', function(req, res){
+  res.render('index', {
+    color: generateRandomHexCode(),
+    textColor: generateRandomHexCode()
+  })
+});
 
 module.exports = router;
 
@@ -54,4 +63,14 @@ function generateStory3(formData){
   // The Ugly Duckling
 
 }
+
+
+function generateRandomHexCode() {
+  let hexCode = "#"
+  while (hexCode.length < 7) {
+    hexCode += (Math.round(Math.random() * 15)).toString(16)
+  }
+  return hexCode
+}
+
 
