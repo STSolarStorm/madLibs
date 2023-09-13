@@ -3,7 +3,8 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index');
+  res.render('index')
+
 });
 
 
@@ -28,10 +29,13 @@ function getStory(formData){
     return generateStory2(formData);
   } else if (formData.storyChoice === "3"){
     return generateStory3(formData);
+  } else if (formData.storyChoice === "Random") {
+    return randomStory(formData);
   } else {
     return "invalid";
   }
 }
+
 
 function generateStory1(formData){
   return `There was once a ${formData.adjective1} ${formData.noun1} who was friends with a ${formData.noun2}.
@@ -69,4 +73,14 @@ function generateRandomHexCode() {
   return hexCode
 }
 
-
+function randomStory(formData){
+  let answers = [1, 2, 3];
+  let choice = Math.floor(Math.random()*answers.length);
+  if (choice === 1) {
+    return generateStory1(formData)
+  } else if (choice === 2) {
+    return generateStory2(formData)
+  } else {
+    return generateStory3(formData)
+  }
+}
