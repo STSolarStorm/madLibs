@@ -11,17 +11,13 @@ router.post('/story', function(req,res){
   let body = req.body;
   let newStory =  getStory(body);
   res.render('story',{
-    newStory: newStory
+    newStory: newStory,
+    color: generateRandomHexCode(),
+    textColor: generateRandomHexCode()
   });
 })
 
 
-router.post('/story', function(req, res){
-  res.render('index', {
-    color: generateRandomHexCode(),
-    textColor: generateRandomHexCode()
-  })
-});
 
 module.exports = router;
 
